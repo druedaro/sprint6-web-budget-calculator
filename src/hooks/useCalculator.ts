@@ -1,9 +1,11 @@
-import {useState} from 'react';
-import type {Service} from '../types';
-import {SERVICES_DATA} from '../data';
+import { useState } from 'react';
+import type { Service, WebConfiguration } from '../types/';
+import { calculateTotalPrice } from '../utils/budgetUtils';
+import { SERVICES_DATA } from '../data/';
 
 export const useCalculator = () => {
   const [services, setServices] = useState<Service[]>(SERVICES_DATA);
+  const [webConfig, setWebConfig] = useState<WebConfiguration>({ pages: 1, languages: 1 });
 
   const handleServiceToggle = (serviceId: string) => {
     setServices(prevServices => 
@@ -13,15 +15,19 @@ export const useCalculator = () => {
     );
   };
 
-  const getTotalPrice = () => {
-    return services
-      .filter(service => service.selected)
-      .reduce((total, service) => total + service.price, 0);
+  const handleWebConfigChange = (field: 'pages' | 'languages', value: number) => {
+    setWebConfig(prev => ({ ...prev, [field]: value }));
   };
+
+  const totalPrice = calculateTotalPrice(services, webConfig);
+  const isWebSelected = services.some(service => service.id === 'web' && service.selected);
 
   return {
     services,
+    webConfig,
+    totalPrice,
+    isWebSelected,
     handleServiceToggle,
-    totalPrice: getTotalPrice(),
+    handleWebConfigChange,
   };
 };
