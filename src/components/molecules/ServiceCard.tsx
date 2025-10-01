@@ -1,49 +1,26 @@
 import Checkbox from '../atoms/Checkbox';
+import { formatCurrency } from '../../utils/budgetUtils';
+import type { Service } from '../../types/';
 
 interface ServiceCardProps {
-  id: string;
-  name: string;
-  price: number;
-  selected: boolean;
-  onToggle: (id: string) => void;
-  annualDiscount?: boolean;
+  service: Service;
+  onToggle: (serviceId: string) => void;
 }
 
-const ServiceCard = ({ 
-  id, 
-  name, 
-  price, 
-  selected, 
-  onToggle,
-  annualDiscount = false 
-}: ServiceCardProps) => {
-  
-  const formatPrice = (amount: number) => {
-    return `€${amount.toFixed(2)}`;
-  };
-  
-  const finalPrice = annualDiscount ? price * 0.8 : price;
-  
+const ServiceCard = ({ service, onToggle }: ServiceCardProps) => {
   return (
-    <div className={`p-4 border rounded-lg transition-colors ${
-      selected ? 'border-green-500 bg-green-50' : 'border-gray-200'
-    }`}>
+    <div className="p-4 border border-gray-200 rounded-lg hover:border-green-300 transition-colors">
       <div className="flex items-center justify-between">
-        <Checkbox
-          id={id}
-          checked={selected}
-          onChange={() => onToggle(id)}
-          label={name}
-        />
-        <div className="text-right">
-          <div className="text-lg font-semibold text-gray-900">
-            {formatPrice(finalPrice)}
-          </div>
-          {annualDiscount && (
-            <div className="text-sm text-gray-500 line-through">
-              {formatPrice(price)}
-            </div>
-          )}
+        <div className="flex-1">
+          <Checkbox
+            id={`service-${service.id}`}
+            label={service.name}
+            checked={service.selected}
+            onChange={() => onToggle(service.id)}
+          />
+        </div>
+        <div className="ml-4 text-lg font-semibold text-green-600">
+          {formatCurrency(service.price)}
         </div>
       </div>
     </div>
