@@ -6,6 +6,7 @@ import { SERVICES_DATA } from '../data/';
 export const useCalculator = () => {
   const [services, setServices] = useState<Service[]>(SERVICES_DATA);
   const [webConfig, setWebConfig] = useState<WebConfiguration>({ pages: 1, languages: 1 });
+  const [annualDiscount, setAnnualDiscount] = useState(false);
 
   const handleServiceToggle = (serviceId: string) => {
     setServices(prevServices => 
@@ -19,15 +20,17 @@ export const useCalculator = () => {
     setWebConfig(prev => ({ ...prev, [field]: value }));
   };
 
-  const totalPrice = calculateTotalPrice(services, webConfig);
+  const totalPrice = calculateTotalPrice(services, webConfig, annualDiscount);
   const isWebSelected = services.some(service => service.id === 'web' && service.selected);
 
   return {
     services,
     webConfig,
+    annualDiscount,
     totalPrice,
     isWebSelected,
     handleServiceToggle,
     handleWebConfigChange,
+    setAnnualDiscount,
   };
 };
