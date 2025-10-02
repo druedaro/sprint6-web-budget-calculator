@@ -1,5 +1,5 @@
 import { formatCurrency, calculateTotalPrice } from '../budgetUtils';
-import type { Service } from '../../types/';
+import type { Service } from '../../types';
 
 describe('budgetUtils', () => {
   const mockServices: Service[] = [
