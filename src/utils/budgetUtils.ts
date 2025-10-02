@@ -27,6 +27,7 @@ export const generateBudgetId = (): string => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
+
 export const sortBudgets = (budgets: Budget[], sortOrder: SortOrder): Budget[] => {
   if (sortOrder === 'reset') return budgets;
   
@@ -40,6 +41,7 @@ export const sortBudgets = (budgets: Budget[], sortOrder: SortOrder): Budget[] =
     return 0;
   });
 };
+
 
 export const filterBudgets = (budgets: Budget[], searchTerm: string): Budget[] => {
   if (!searchTerm.trim()) return budgets;

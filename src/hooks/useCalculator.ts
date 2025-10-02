@@ -1,13 +1,17 @@
 import { useState } from 'react';
-import type { Service, WebConfiguration, Budget, BudgetFormData } from '../types/';
-import { calculateTotalPrice, generateBudgetId } from '../utils/budgetUtils';
+import type { Service, WebConfiguration, Budget, BudgetFormData, SortOrder } from '../types/';
+import { calculateTotalPrice, generateBudgetId, sortBudgets, filterBudgets } from '../utils/budgetUtils';
 import { SERVICES_DATA } from '../data/';
 
 export const useCalculator = () => {
   const [services, setServices] = useState<Service[]>(SERVICES_DATA);
   const [webConfig, setWebConfig] = useState<WebConfiguration>({ pages: 1, languages: 1 });
   const [annualDiscount, setAnnualDiscount] = useState(false);
+  
   const [budgets, setBudgets] = useState<Budget[]>([]);
+
+  const [sortOrder, setSortOrder] = useState<SortOrder>('reset');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleServiceToggle = (serviceId: string) => {
     setServices(prevServices => 
@@ -49,16 +53,22 @@ export const useCalculator = () => {
   const totalPrice = calculateTotalPrice(services, webConfig, annualDiscount);
   const isWebSelected = services.some(service => service.id === 'web' && service.selected);
 
+  const processedBudgets = sortBudgets(filterBudgets(budgets, searchTerm), sortOrder);
+
   return {
     services,
     webConfig,
     annualDiscount,
-    budgets,
+    budgets: processedBudgets,
+    sortOrder,
+    searchTerm,
     totalPrice,
     isWebSelected,
     handleServiceToggle,
     handleWebConfigChange,
     handleBudgetSubmit,
     setAnnualDiscount,
+    setSortOrder,
+    setSearchTerm,
   };
 };
