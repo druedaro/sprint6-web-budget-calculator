@@ -9,3 +9,24 @@ export interface WebConfiguration {
     pages: number;
     languages: number;
 }
+
+export interface Budget {
+    id: string;
+    budegetName: string;
+    clientName: string;
+    phone: string;
+    email: string;
+    services: Service[];
+    webConfig: WebConfiguration;
+    annualDiscount: boolean;
+    totalPrice: number;
+    createdAt: Date;
+}
+
+export interface BudgetFormData {
+    budegetName: string;
+    clientName: string;
+    phone: string;
+    email: string;  
+}
+
