@@ -24,7 +24,7 @@ export interface Budget {
 }
 
 export interface BudgetFormData {
-    budegetName: string;
+    budgetName: string;
     clientName: string;
     phone: string;
     email: string;  
