@@ -30,3 +30,7 @@ export interface BudgetFormData {
     email: string;  
 }
 
+export interface BudgetFormProps {
+    onSubmit: (data: BudgetFormData) => void;
+    totalPrice: number;
+}
