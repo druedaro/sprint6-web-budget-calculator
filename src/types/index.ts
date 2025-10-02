@@ -34,3 +34,5 @@ export interface BudgetFormProps {
     onSubmit: (data: BudgetFormData) => void;
     totalPrice: number;
 }
+
+export type SortOrder = 'alphabetical' | 'date' | 'reset';
