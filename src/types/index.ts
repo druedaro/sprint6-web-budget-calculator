@@ -12,7 +12,7 @@ export interface WebConfiguration {
 
 export interface Budget {
     id: string;
-    budegetName: string;
+    budgetName: string;
     clientName: string;
     phone: string;
     email: string;
