@@ -1,5 +1,5 @@
-import { useId } from "react";
-import type { InputHTMLAttributes } from "react";
+import { useId } from 'react';
+import type { InputHTMLAttributes } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -7,19 +7,19 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   helperText?: string;
 }
 
-const Input = ({
-  label,
-  error,
-  helperText,
-  className = "",
+const Input = ({ 
+  label, 
+  error, 
+  helperText, 
+  className = '', 
   id,
-  ...props
+  ...props 
 }: InputProps) => {
   const generatedId = useId();
   const inputId = id || generatedId;
-
+  
   return (
-     <div className="w-full">
+    <div className="w-full">
       {label && (
         <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 mb-2">
           {label}

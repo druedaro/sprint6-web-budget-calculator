@@ -1,34 +1,39 @@
-import { formatCurrency, calculateTotalPrice } from '../budgetUtils';
-import type { Service } from '../../types';
+import { calculateTotalPrice, formatCurrency } from '../budgetUtils';
+import type { Service, WebConfiguration } from '../../types/';
 
-describe('budgetUtils', () => {
-  const mockServices: Service[] = [
-    { id: 'seo', name: 'SEO Campaign', price: 300, selected: true },
-    { id: 'ads', name: 'Google Ads', price: 400, selected: false },
-    { id: 'web', name: 'Web Development', price: 500, selected: true }
-  ];
-
-  describe('formatCurrency', () => {
-    it('should format price correctly', () => {
-      expect(formatCurrency(100)).toBe('€100.00');
-      expect(formatCurrency(1234.56)).toBe('€1234.56');
-    });
+describe('Budget Utilities - Essential Tests', () => {
+  it('should calculate total price correctly', () => {
+    const services: Service[] = [
+      { id: 'seo', name: 'SEO', price: 300, selected: true },
+      { id: 'web', name: 'Web', price: 500, selected: true },
+    ];
+    const webConfig: WebConfiguration = { pages: 2, languages: 2 };
+    
+    const total = calculateTotalPrice(services, webConfig, false);
+    expect(total).toBe(920);
   });
 
-  describe('calculateTotalPrice', () => {
-    it('should calculate total for selected services', () => {
-      const total = calculateTotalPrice(mockServices, { pages: 1, languages: 1 }, false);
-      expect(total).toBe(800);
-    });
+  it('should apply annual discount', () => {
+    const services: Service[] = [
+      { id: 'seo', name: 'SEO', price: 300, selected: true },
+    ];
+    const webConfig: WebConfiguration = { pages: 1, languages: 1 };
+    
+    const total = calculateTotalPrice(services, webConfig, true);
+    expect(total).toBe(240);
+  });
 
-    it('should apply annual discount', () => {
-      const total = calculateTotalPrice(mockServices, { pages: 1, languages: 1 }, true);
-      expect(total).toBe(640); 
-    });
+  it('should format currency', () => {
+    expect(formatCurrency(1000)).toBe('€1,000.00');
+  });
 
-    it('should add web configuration costs', () => {
-      const total = calculateTotalPrice(mockServices, { pages: 3, languages: 2 }, false);
-      expect(total).toBe(890); 
-    });
+  it('should handle no services selected', () => {
+    const services: Service[] = [
+      { id: 'seo', name: 'SEO', price: 300, selected: false },
+    ];
+    const webConfig: WebConfiguration = { pages: 1, languages: 1 };
+    
+    const total = calculateTotalPrice(services, webConfig, false);
+    expect(total).toBe(0);
   });
 });

@@ -3,35 +3,27 @@ import type { Budget } from '../types/';
 
 export const useBudgetStorage = (
   budgets: Budget[],
-  setBudgets: React.Dispatch<React.SetStateAction<Budget[]>>
+  setBudgets: (budgets: Budget[]) => void
 ) => {
-  
   useEffect(() => {
-    try {
-      const savedBudgets = localStorage.getItem('budgets');
-      if (savedBudgets) {
-        const parsedBudgets = JSON.parse(savedBudgets);
-      
-        const budgetsWithDates = parsedBudgets.map((budget: any) => ({
+    const saved = localStorage.getItem('budgets');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        const budgetsWithDates = parsed.map((budget: Budget & { createdAt: string }) => ({
           ...budget,
-          createdAt: new Date(budget.createdAt),
+          createdAt: new Date(budget.createdAt)
         }));
         setBudgets(budgetsWithDates);
+      } catch (error) {
+        console.error('Error loading budgets:', error);
       }
-    } catch (error) {
-      console.error('Error loading budgets from localStorage:', error);
-     
-      localStorage.removeItem('budgets');
     }
   }, [setBudgets]);
 
   useEffect(() => {
-    try {
-      if (budgets.length > 0) {
-        localStorage.setItem('budgets', JSON.stringify(budgets));
-      }
-    } catch (error) {
-      console.error('Error saving budgets to localStorage:', error);
+    if (budgets.length > 0) {
+      localStorage.setItem('budgets', JSON.stringify(budgets));
     }
   }, [budgets]);
 };

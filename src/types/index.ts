@@ -6,33 +6,28 @@ export interface Service {
 }
 
 export interface WebConfiguration {
-    pages: number;
-    languages: number;
+  pages: number;
+  languages: number;
 }
 
 export interface Budget {
-    id: string;
-    budgetName: string;
-    clientName: string;
-    phone: string;
-    email: string;
-    services: Service[];
-    webConfig: WebConfiguration;
-    annualDiscount: boolean;
-    totalPrice: number;
-    createdAt: Date;
+  id: string;
+  budgetName: string;
+  clientName: string;
+  phone: string;
+  email: string;
+  services: Service[];
+  webConfig: WebConfiguration;
+  totalPrice: number;
+  annualDiscount: boolean;
+  createdAt: Date;
 }
 
 export interface BudgetFormData {
-    budgetName: string;
-    clientName: string;
-    phone: string;
-    email: string;  
-}
-
-export interface BudgetFormProps {
-    onSubmit: (data: BudgetFormData) => void;
-    totalPrice: number;
+  budgetName: string;
+  clientName: string;
+  phone: string;
+  email: string;
 }
 
 export type SortOrder = 'alphabetical' | 'date' | 'reset';

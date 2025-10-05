@@ -1,68 +1,55 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { Service, WebConfiguration } from '../types/';
+import { SERVICES_DATA } from '../data/';
 
 export const useUrlSync = (
   services: Service[],
   webConfig: WebConfiguration,
-  setServices: React.Dispatch<React.SetStateAction<Service[]>>,
-  setWebConfig: React.Dispatch<React.SetStateAction<WebConfiguration>>
+  setServices: (services: Service[]) => void,
+  setWebConfig: (config: WebConfiguration) => void
 ) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
+
   useEffect(() => {
-    const servicesParam = searchParams.get('services');
-    const pagesParam = searchParams.get('pages');
-    const languagesParam = searchParams.get('languages');
+    const seo = searchParams.get('CampaingSeo') === 'true';
+    const ads = searchParams.get('CampaingAds') === 'true';
+    const web = searchParams.get('WebPage') === 'true';
 
-    if (servicesParam) {
-      const selectedServiceIds = servicesParam.split(',');
-      setServices(prevServices =>
-        prevServices.map(service => ({
-          ...service,
-          selected: selectedServiceIds.includes(service.id)
-        }))
-      );
-    }
+    if (seo || ads || web) {
+      setServices(SERVICES_DATA.map(service => ({
+        ...service,
+        selected: service.id === 'seo' ? seo : service.id === 'ads' ? ads : service.id === 'web' ? web : false
+      })));
 
-    if (pagesParam) {
-      const pages = parseInt(pagesParam);
-      if (!isNaN(pages) && pages > 0) {
-        setWebConfig(prev => ({ ...prev, pages }));
-      }
-    }
-
-    if (languagesParam) {
-      const languages = parseInt(languagesParam);
-      if (!isNaN(languages) && languages > 0) {
-        setWebConfig(prev => ({ ...prev, languages }));
+      if (web) {
+        const pages = parseInt(searchParams.get('pages') || '1');
+        const languages = parseInt(searchParams.get('lang') || '1');
+        setWebConfig({ pages, languages });
       }
     }
   }, [searchParams, setServices, setWebConfig]);
 
+
   useEffect(() => {
-    const selectedServices = services.filter(s => s.selected);
     const params = new URLSearchParams();
+    
+    services.forEach(s => {
+      if (s.selected) {
+        params.set(s.id === 'seo' ? 'CampaingSeo' : s.id === 'ads' ? 'CampaingAds' : 'WebPage', 'true');
+      }
+    });
 
-    if (selectedServices.length > 0) {
-      params.set('services', selectedServices.map(s => s.id).join(','));
+    if (services.some(s => s.id === 'web' && s.selected)) {
+      params.set('pages', webConfig.pages.toString());
+      params.set('lang', webConfig.languages.toString());
     }
 
-    if (selectedServices.some(s => s.id === 'web')) {
-      if (webConfig.pages > 1) {
-        params.set('pages', webConfig.pages.toString());
-      }
-      if (webConfig.languages > 1) {
-        params.set('languages', webConfig.languages.toString());
-      }
-    }
-
-    setSearchParams(params, { replace: true });
+    setSearchParams(params);
   }, [services, webConfig, setSearchParams]);
 
-  const clearURL = () => {
-    setSearchParams({}, { replace: true });
+  return {
+    clearURL: () => setSearchParams(new URLSearchParams())
   };
-
-  return { clearURL };
 };
