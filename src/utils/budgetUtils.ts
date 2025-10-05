@@ -1,4 +1,5 @@
 import type { Service, WebConfiguration, Budget, SortOrder } from '../types/';
+import { WEB_PAGE_PRICE, WEB_LANGUAGE_PRICE, ANNUAL_DISCOUNT_PERCENTAGE } from '../data/';
 
 export const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('es-ES', {
@@ -18,12 +19,12 @@ export const calculateTotalPrice = (
   
   const isWebSelected = services.some(service => service.id === 'web' && service.selected);
   const webConfigTotal = isWebSelected 
-    ? (webConfig.pages - 1) * 30 + (webConfig.languages - 1) * 30
+    ? (webConfig.pages - 1) * WEB_PAGE_PRICE + (webConfig.languages - 1) * WEB_LANGUAGE_PRICE
     : 0;
 
   const total = servicesTotal + webConfigTotal;
   
-  return annualDiscount ? total * 0.8 : total;
+  return annualDiscount ? total * (1 - ANNUAL_DISCOUNT_PERCENTAGE) : total;
 };
 
 export const generateBudgetId = (): string => {
