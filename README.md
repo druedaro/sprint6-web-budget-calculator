@@ -59,6 +59,3 @@ The project includes comprehensive tests for:
 - Component interactions
 
 Run tests with npm test or npm run test:watch for watch mode.
-```bash
-git add README.md
-git commit -m "docs: add comprehensive project documentation"
