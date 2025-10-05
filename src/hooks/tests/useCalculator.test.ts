@@ -39,7 +39,7 @@ describe('useCalculator Hook Logic', () => {
       const webConfig: WebConfiguration = { pages: 3, languages: 2 };
 
       const total = calculateTotalPrice(services, webConfig, false);
-      expect(total).toBe(650); // 500 + (3 + 2) * 30
+      expect(total).toBe(650);
     });
 
     it('should apply annual discount correctly', () => {
@@ -49,7 +49,7 @@ describe('useCalculator Hook Logic', () => {
       const webConfig: WebConfiguration = { pages: 1, languages: 1 };
 
       const total = calculateTotalPrice(services, webConfig, true);
-      expect(total).toBe(240); // 300 * 0.8
+      expect(total).toBe(240); 
     });
   });
 
@@ -63,9 +63,9 @@ describe('useCalculator Hook Logic', () => {
 
       const formData = {
         budgetName: 'Test Budget',
-        clientName: 'John Doe',
+        clientName: 'David Rueda',
         phone: '123456789',
-        email: 'john@example.com'
+        email: 'david.rueda@gmail.com'
       };
 
       const budget = {
