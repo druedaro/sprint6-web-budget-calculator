@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Service, WebConfiguration, Budget, BudgetFormData, SortOrder } from '../types/';
 import { calculateTotalPrice, generateBudgetId, sortBudgets, filterBudgets } from '../utils/budgetUtils';
 import { SERVICES_DATA } from '../data/';
+import { useUrlSync } from './useUrlSync';
+import { useBudgetStorage } from './useBudgetStorage';
 
 export const useCalculator = () => {
   const [services, setServices] = useState<Service[]>(SERVICES_DATA);
@@ -12,6 +14,9 @@ export const useCalculator = () => {
 
   const [sortOrder, setSortOrder] = useState<SortOrder>('reset');
   const [searchTerm, setSearchTerm] = useState('');
+
+  const { clearURL } = useUrlSync(services, webConfig, setServices, setWebConfig);
+  useBudgetStorage(budgets, setBudgets);
 
   const handleServiceToggle = (serviceId: string) => {
     setServices(prevServices => 
@@ -48,11 +53,11 @@ export const useCalculator = () => {
     setServices(SERVICES_DATA.map(service => ({ ...service, selected: false })));
     setWebConfig({ pages: 1, languages: 1 });
     setAnnualDiscount(false);
+    clearURL();
   };
 
   const totalPrice = calculateTotalPrice(services, webConfig, annualDiscount);
   const isWebSelected = services.some(service => service.id === 'web' && service.selected);
-
   const processedBudgets = sortBudgets(filterBudgets(budgets, searchTerm), sortOrder);
 
   return {
