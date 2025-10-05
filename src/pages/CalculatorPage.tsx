@@ -1,4 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import ServicesList from '../components/organisms/ServicesList';
+import WebConfigurationPanel from '../components/organisms/WebConfigurationPanel';
+import BudgetForm from '../components/organisms/BudgetForm';
+import BudgetList from '../components/organisms/BudgetList';
 import { formatCurrency } from '../utils/budgetUtils';
 import { useCalculator } from '../hooks/useCalculator';
 
@@ -9,11 +13,17 @@ const CalculatorPage = () => {
     services,
     webConfig,
     annualDiscount,
+    budgets: processedBudgets,
+    sortOrder,
+    searchTerm,
     totalPrice,
     isWebSelected,
     handleServiceToggle,
     handleWebConfigChange,
+    handleBudgetSubmit,
     setAnnualDiscount,
+    setSortOrder,
+    setSearchTerm,
   } = useCalculator();
 
   return (
@@ -31,7 +41,6 @@ const CalculatorPage = () => {
         </header>
 
         <main className="max-w-4xl mx-auto space-y-8">
-
           <section className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center justify-center space-x-3">
               <span className={`text-sm ${!annualDiscount ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
@@ -43,6 +52,7 @@ const CalculatorPage = () => {
                   checked={annualDiscount}
                   onChange={(e) => setAnnualDiscount(e.target.checked)}
                   className="sr-only peer"
+                  aria-label="Toggle annual payment discount"
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
               </label>
@@ -52,12 +62,38 @@ const CalculatorPage = () => {
             </div>
           </section>
 
+          <ServicesList
+            services={services}
+            onServiceToggle={handleServiceToggle}
+            annualDiscount={annualDiscount}
+          />
+
+          {isWebSelected && (
+            <WebConfigurationPanel
+              webConfig={webConfig}
+              onConfigChange={handleWebConfigChange}
+            />
+          )}
+
           <section className="text-center py-6">
             <div className="text-sm text-gray-600 mb-2">Estimated Price:</div>
             <div className="text-4xl font-bold text-gray-900">
               {formatCurrency(totalPrice)}
             </div>
           </section>
+
+          <BudgetForm
+            onSubmit={handleBudgetSubmit}
+            totalPrice={totalPrice}
+          />
+
+          <BudgetList
+            budgets={processedBudgets}
+            sortOrder={sortOrder}
+            onSortOrderChange={setSortOrder}
+            searchTerm={searchTerm}
+            onSearchTermChange={setSearchTerm}
+          />
         </main>
       </div>
     </div>
