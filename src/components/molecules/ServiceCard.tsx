@@ -15,6 +15,7 @@ const ServiceCard = ({ service, onToggle }: ServiceCardProps) => {
           <Checkbox
             id={`service-${service.id}`}
             label={service.name}
+            description={`${formatCurrency(service.price)}`}
             checked={service.selected}
             onChange={() => onToggle(service.id)}
           />

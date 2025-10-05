@@ -1,4 +1,3 @@
-
 import { calculateTotalPrice } from '../../utils/budgetUtils';
 import { SERVICES_DATA } from '../../data/';
 import type { Service, WebConfiguration } from '../../types/';
@@ -49,7 +48,7 @@ describe('useCalculator Hook Logic', () => {
       const webConfig: WebConfiguration = { pages: 1, languages: 1 };
 
       const total = calculateTotalPrice(services, webConfig, true);
-      expect(total).toBe(240); 
+      expect(total).toBe(240);
     });
   });
 

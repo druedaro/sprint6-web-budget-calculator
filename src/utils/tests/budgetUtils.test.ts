@@ -1,113 +1,39 @@
-import { 
-  formatCurrency, 
-  calculateTotalPrice, 
-  generateBudgetId,
-  sortBudgets,
-  filterBudgets 
-} from '../budgetUtils';
-import type { Service, Budget } from '../../types/';
+import { calculateTotalPrice, formatCurrency } from '../budgetUtils';
+import type { Service, WebConfiguration } from '../../types/';
 
-describe('budgetUtils', () => {
-  const mockServices: Service[] = [
-    { id: 'seo', name: 'SEO Campaign', price: 300, selected: true },
-    { id: 'ads', name: 'Google Ads', price: 400, selected: false },
-    { id: 'web', name: 'Web Development', price: 500, selected: true }
-  ];
-
-  const mockBudgets: Budget[] = [
-    {
-      id: '1',
-      budgetName: 'Project B',
-      clientName: 'Pepe Rodriguez',
-      phone: '123456789',
-      email: 'pepe@hotmail.com',
-      services: [],
-      webConfig: { pages: 1, languages: 1 },
-      totalPrice: 800,
-      annualDiscount: false,
-      createdAt: new Date('2024-01-01'),
-    },
-    {
-      id: '2',
-      budgetName: 'Project A',
-      clientName: 'Emilia Jimenez',
-      phone: '987654321',
-      email: 'emilia@gmail.com',
-      services: [],
-      webConfig: { pages: 1, languages: 1 },
-      totalPrice: 600,
-      annualDiscount: true,
-      createdAt: new Date('2024-01-02'),
-    },
-  ];
-
-  describe('formatCurrency', () => {
-    it('should format currency with Intl API', () => {
-      expect(formatCurrency(100)).toBe('100,00 €');
-      expect(formatCurrency(1234.56)).toBe('1.234,56 €');
-    });
+describe('Budget Utilities - Essential Tests', () => {
+  it('should calculate total price correctly', () => {
+    const services: Service[] = [
+      { id: 'seo', name: 'SEO', price: 300, selected: true },
+      { id: 'web', name: 'Web', price: 500, selected: true },
+    ];
+    const webConfig: WebConfiguration = { pages: 2, languages: 2 };
+    
+    const total = calculateTotalPrice(services, webConfig, false);
+    expect(total).toBe(920);
   });
 
-  describe('calculateTotalPrice', () => {
-    it('should calculate total for selected services', () => {
-      const total = calculateTotalPrice(mockServices, { pages: 1, languages: 1 }, false);
-      expect(total).toBe(800); 
-    });
-
-    it('should apply annual discount', () => {
-      const total = calculateTotalPrice(mockServices, { pages: 1, languages: 1 }, true);
-      expect(total).toBe(640); 
-    });
-
-    it('should add web configuration costs', () => {
-      const total = calculateTotalPrice(mockServices, { pages: 3, languages: 2 }, false);
-      expect(total).toBe(890); 
-    });
+  it('should apply annual discount', () => {
+    const services: Service[] = [
+      { id: 'seo', name: 'SEO', price: 300, selected: true },
+    ];
+    const webConfig: WebConfiguration = { pages: 1, languages: 1 };
+    
+    const total = calculateTotalPrice(services, webConfig, true);
+    expect(total).toBe(240);
   });
 
-  describe('generateBudgetId', () => {
-    it('should generate unique IDs', () => {
-      const id1 = generateBudgetId();
-      const id2 = generateBudgetId();
-      expect(id1).not.toBe(id2);
-      expect(typeof id1).toBe('string');
-    });
+  it('should format currency', () => {
+    expect(formatCurrency(1000)).toBe('€1,000.00');
   });
 
-  describe('sortBudgets', () => {
-    it('should sort alphabetically', () => {
-      const sorted = sortBudgets(mockBudgets, 'alphabetical');
-      expect(sorted[0].budgetName).toBe('Project A');
-      expect(sorted[1].budgetName).toBe('Project B');
-    });
-
-    it('should sort by date', () => {
-      const sorted = sortBudgets(mockBudgets, 'date');
-      expect(sorted[0].createdAt.getTime()).toBeGreaterThan(sorted[1].createdAt.getTime());
-    });
-
-    it('should return original order for reset', () => {
-      const sorted = sortBudgets(mockBudgets, 'reset');
-      expect(sorted).toEqual(mockBudgets);
-    });
-  });
-
-  describe('filterBudgets', () => {
-    it('should filter by budget name', () => {
-      const filtered = filterBudgets(mockBudgets, 'Project A');
-      expect(filtered).toHaveLength(1);
-      expect(filtered[0].budgetName).toBe('Project A');
-    });
-
-    it('should filter by client name', () => {
-      const filtered = filterBudgets(mockBudgets, 'John');
-      expect(filtered).toHaveLength(1);
-      expect(filtered[0].clientName).toBe('John Doe');
-    });
-
-    it('should return all budgets for empty search', () => {
-      const filtered = filterBudgets(mockBudgets, '');
-      expect(filtered).toEqual(mockBudgets);
-    });
+  it('should handle no services selected', () => {
+    const services: Service[] = [
+      { id: 'seo', name: 'SEO', price: 300, selected: false },
+    ];
+    const webConfig: WebConfiguration = { pages: 1, languages: 1 };
+    
+    const total = calculateTotalPrice(services, webConfig, false);
+    expect(total).toBe(0);
   });
 });

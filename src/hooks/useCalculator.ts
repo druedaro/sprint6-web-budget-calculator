@@ -9,9 +9,7 @@ export const useCalculator = () => {
   const [services, setServices] = useState<Service[]>(SERVICES_DATA);
   const [webConfig, setWebConfig] = useState<WebConfiguration>({ pages: 1, languages: 1 });
   const [annualDiscount, setAnnualDiscount] = useState(false);
-  
   const [budgets, setBudgets] = useState<Budget[]>([]);
-
   const [sortOrder, setSortOrder] = useState<SortOrder>('reset');
   const [searchTerm, setSearchTerm] = useState('');
 
