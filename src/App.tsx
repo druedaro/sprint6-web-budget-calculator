@@ -1,12 +1,17 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import WelcomePage from './pages/WelcomePage';
+import CalculatorPage from './pages/CalculatorPage';
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center text-gray-900">
-          Budget Calculator
-        </h1>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/calculator" element={<CalculatorPage />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
