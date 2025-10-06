@@ -1,10 +1,4 @@
-import type { ReactNode, ButtonHTMLAttributes } from 'react';
-
-interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
-}
+import type { IconButtonProps } from '../../config/types';
 
 const IconButton = ({ 
   icon, 

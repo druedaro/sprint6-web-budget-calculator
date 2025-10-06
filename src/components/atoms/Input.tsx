@@ -1,11 +1,5 @@
 import { useId } from 'react';
-import type { InputHTMLAttributes } from 'react';
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
-  helperText?: string;
-}
+import type { InputProps } from '../../config/types';
 
 const Input = ({ 
   label, 

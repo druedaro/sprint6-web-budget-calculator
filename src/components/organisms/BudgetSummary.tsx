@@ -1,14 +1,7 @@
 import Checkbox from '../atoms/Checkbox';
 import Button from '../atoms/Button';
 import { formatCurrency } from '../../utils/budgetUtils';
-
-interface BudgetSummaryProps {
-  totalPrice: number;
-  annualDiscount: boolean;
-  onAnnualDiscountChange: (checked: boolean) => void;
-  onRequestBudget: () => void;
-  hasSelectedServices?: boolean;
-}
+import type { BudgetSummaryProps } from '../../config/types';
 
 const BudgetSummary = ({ 
   totalPrice, 

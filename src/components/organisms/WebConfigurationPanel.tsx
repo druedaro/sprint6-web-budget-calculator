@@ -4,12 +4,7 @@ import HelpModal from '../molecules/HelpModal';
 import IconButton from '../atoms/IconButton';
 import { calculateWebPrice, formatCurrency } from '../../utils/budgetUtils';
 import { HELP_CONTENT } from '../../config/appData';
-import type { WebConfiguration } from '../../config/types';
-
-interface WebConfigurationProps {
-  webConfig: WebConfiguration;
-  onConfigChange: (field: 'pages' | 'languages', value: number) => void;
-}
+import type { WebConfigurationProps } from '../../config/types';
 
 const WebConfigurationPanel = ({ 
   webConfig, 

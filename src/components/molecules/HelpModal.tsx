@@ -1,12 +1,6 @@
 import Button from '../atoms/Button';
 import IconButton from '../atoms/IconButton';
-
-interface HelpModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  content: string;
-}
+import type { HelpModalProps } from '../../config/types';
 
 const HelpModal = ({ isOpen, onClose, title, content }: HelpModalProps) => {
   if (!isOpen) return null;

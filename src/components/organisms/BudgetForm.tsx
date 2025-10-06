@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import type { BudgetFormData } from '../../config/types';
 import { formatCurrency } from '../../utils/budgetUtils';
-
-interface BudgetFormProps {
-  onSubmit: (data: BudgetFormData) => void;
-  totalPrice: number;
-}
+import type { BudgetFormProps, BudgetFormData } from '../../config/types';
 
 const BudgetForm = ({ 
   onSubmit, 

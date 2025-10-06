@@ -1,10 +1,5 @@
 import { useId } from 'react';
-import type { InputHTMLAttributes } from 'react';
-
-interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  description?: string;
-}
+import type { CheckboxProps } from '../../config/types';
 
 const Checkbox = ({ 
   label, 

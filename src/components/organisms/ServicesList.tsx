@@ -1,10 +1,4 @@
-import type { Service } from '../../config/types';
-
-interface ServicesListProps {
-  services: Service[];
-  onServiceToggle: (serviceId: string) => void;
-  annualDiscount?: boolean;
-}
+import type { ServicesListProps } from '../../config/types';
 
 const ServicesList = ({ services, onServiceToggle, annualDiscount = false }: ServicesListProps) => {
   return (

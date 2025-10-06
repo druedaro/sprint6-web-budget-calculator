@@ -1,11 +1,6 @@
 import Checkbox from '../atoms/Checkbox';
 import { formatCurrency } from '../../utils/budgetUtils';
-import type { Service } from '../../config/types';
-
-interface ServiceCardProps {
-  service: Service;
-  onToggle: (serviceId: string) => void;
-}
+import type { ServiceCardProps } from '../../config/types';
 
 const ServiceCard = ({ service, onToggle }: ServiceCardProps) => {
   return (

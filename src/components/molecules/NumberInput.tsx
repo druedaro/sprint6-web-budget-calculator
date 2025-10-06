@@ -1,14 +1,6 @@
 import Input from '../atoms/Input';
 import IconButton from '../atoms/IconButton';
-
-interface NumberInputProps {
-  label: string;
-  value: number;
-  onChange: (value: number) => void;
-  min?: number;
-  max?: number;
-  helpText?: string;
-}
+import type { NumberInputProps } from '../../config/types';
 
 const NumberInput = ({ 
   label, 

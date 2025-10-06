@@ -1,15 +1,7 @@
 import Button from '../atoms/Button';
 import SearchBar from '../molecules/SearchBar';
 import { formatCurrency } from '../../utils/budgetUtils';
-import type { Budget, SortOrder } from '../../config/types';
-
-interface BudgetListProps {
-  budgets: Budget[];
-  searchTerm: string;
-  onSearchTermChange: (term: string) => void;
-  sortOrder: SortOrder;
-  onSortOrderChange: (order: SortOrder) => void;
-}
+import type { BudgetListProps, Budget } from '../../config/types';
 
 const BudgetList = ({ 
   budgets, 

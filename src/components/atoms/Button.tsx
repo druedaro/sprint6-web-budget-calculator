@@ -1,10 +1,4 @@
-import type { ReactNode, ButtonHTMLAttributes } from 'react';
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
-  children: ReactNode;
-}
+import type { ButtonProps } from '../../config/types';
 
 const Button = ({ 
   variant = 'primary', 
