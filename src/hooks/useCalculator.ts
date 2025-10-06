@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import type { Service, WebConfiguration, Budget, BudgetFormData, SortOrder } from '../types/';
+import type { Service, WebConfiguration, Budget, BudgetFormData, SortOrder } from '../config/types';
 import { calculateTotalPrice, generateBudgetId, sortBudgets, filterBudgets } from '../utils/budgetUtils';
-import { SERVICES_DATA } from '../data/';
+import { SERVICES_DATA } from '../config/appData';
 import { useUrlSync } from './useUrlSync';
 import { useBudgetStorage } from './useBudgetStorage';
 

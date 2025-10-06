@@ -3,8 +3,8 @@ import NumberInput from '../molecules/NumberInput';
 import HelpModal from '../molecules/HelpModal';
 import IconButton from '../atoms/IconButton';
 import { calculateWebPrice, formatCurrency } from '../../utils/budgetUtils';
-import { HELP_CONTENT } from '../../data/';
-import type { WebConfiguration } from '../../types/';
+import { HELP_CONTENT } from '../../config/appData';
+import type { WebConfiguration } from '../../config/types';
 
 interface WebConfigurationProps {
   webConfig: WebConfiguration;

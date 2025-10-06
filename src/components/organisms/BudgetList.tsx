@@ -1,7 +1,7 @@
 import Button from '../atoms/Button';
 import SearchBar from '../molecules/SearchBar';
 import { formatCurrency } from '../../utils/budgetUtils';
-import type { Budget, SortOrder } from '../../types/';
+import type { Budget, SortOrder } from '../../config/types';
 
 interface BudgetListProps {
   budgets: Budget[];

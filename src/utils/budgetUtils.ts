@@ -1,5 +1,5 @@
-import type { Service, WebConfiguration, Budget } from '../types/';
-import { ANNUAL_DISCOUNT_RATE, WEB_PAGE_BASE_COST, CURRENCY, LOCALE } from '../data/';
+import type { Service, WebConfiguration, Budget } from '../config/types';
+import { ANNUAL_DISCOUNT_RATE, WEB_PAGE_BASE_COST, CURRENCY, LOCALE } from '../config/appData';
 
 export const calculateWebPrice = (pages: number, languages: number): number => {
   return (pages + languages) * WEB_PAGE_BASE_COST;
