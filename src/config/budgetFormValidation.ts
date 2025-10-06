@@ -9,8 +9,9 @@ export const budgetFormSchema = z.object({
   clientName: z
     .string()
     .min(2, 'Client name must be at least 2 characters')
-    .max(30, 'Client name cannot exceed 30 characters'),
-  
+    .max(30, 'Client name cannot exceed 30 characters')
+    .regex(/^[A-Za-z\sáéíóúÁÉÍÓÚñÑüÜ'-]+$/, 'Client name must not contain numbers or special characters'),
+
   phone: z
     .string()
     .min(8, 'Phone number must be at least 8 digits')
