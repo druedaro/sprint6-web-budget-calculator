@@ -1,13 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { BudgetFormData } from '../../config/types';
+import type { BudgetFormProps } from '../../config/types';
 import { budgetFormSchema, type BudgetFormSchema } from '../../config/budgetFormValidation';
 import { formatCurrency } from '../../utils/budgetUtils';
-
-interface BudgetFormProps {
-  onSubmit: (data: BudgetFormData) => void;
-  totalPrice: number;
-}
 
 const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
   const {

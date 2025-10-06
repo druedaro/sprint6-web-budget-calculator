@@ -99,11 +99,6 @@ export interface BudgetListProps {
   onSortOrderChange: (order: SortOrder) => void;
 }
 
-export interface BudgetFormProps {
-  onSubmit: (data: BudgetFormData) => void;
-  totalPrice: number;
-}
-
 export interface BudgetSummaryProps {
   totalPrice: number;
   annualDiscount: boolean;
@@ -115,4 +110,9 @@ export interface BudgetSummaryProps {
 export interface WebConfigurationProps {
   webConfig: WebConfiguration;
   onConfigChange: (field: 'pages' | 'languages', value: number) => void;
+}
+
+export interface BudgetFormProps {
+  onSubmit: (data: BudgetFormData) => void;
+  totalPrice: number;
 }
