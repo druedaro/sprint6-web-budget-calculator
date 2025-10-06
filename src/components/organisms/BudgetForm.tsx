@@ -1,37 +1,32 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import type { BudgetFormProps } from '../../config/types';
+import { budgetFormSchema, type BudgetFormSchema } from '../../config/budgetFormValidation';
 import { formatCurrency } from '../../utils/budgetUtils';
-import type { BudgetFormProps, BudgetFormData } from '../../config/types';
 
-const BudgetForm = ({ 
-  onSubmit, 
-  totalPrice
-}: BudgetFormProps) => {
-  const [formData, setFormData] = useState<BudgetFormData>({
-    budgetName: '',
-    clientName: '',
-    phone: '',
-    email: '',
+const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isValid }
+  } = useForm<BudgetFormSchema>({
+    resolver: zodResolver(budgetFormSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      budgetName: '',
+      clientName: '',
+      phone: '',
+      email: '',
+    },
   });
-  
-  const handleInputChange = (field: keyof BudgetFormData) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFormData(prev => ({ ...prev, [field]: e.target.value }));
+
+  const onFormSubmit = (data: BudgetFormSchema) => {
+    onSubmit(data);
+    reset();
   };
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (formData.budgetName.trim() && formData.clientName.trim() && 
-        formData.phone.trim() && formData.email.trim()) {
-      onSubmit(formData);
-      setFormData({ budgetName: '', clientName: '', phone: '', email: '' });
-    } else {
-      alert('Please fill in all fields');
-    }
-  };
-  
-  const isDisabled = totalPrice === 0;
+
+  const isDisabled = totalPrice === 0 || isSubmitting || !isValid;
 
   return (
     <section className="bg-white rounded-lg shadow-md p-6">
@@ -41,60 +36,96 @@ const BudgetForm = ({
         </h3>
       </header>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4" noValidate>
         <fieldset>
           <input
+            {...register('budgetName')}
             type="text"
             placeholder="Budget Name"
-            value={formData.budgetName}
-            onChange={handleInputChange('budgetName')}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            required
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+              errors.budgetName ? 'border-red-500' : 'border-gray-300'
+            }`}
             aria-label="Budget name"
+            autoComplete="off"
           />
+          {errors.budgetName && (
+            <p className="mt-1 text-sm text-red-600" role="alert">
+              {errors.budgetName.message}
+            </p>
+          )}
         </fieldset>
         
         <fieldset className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <input
-            type="text"
-            placeholder="Name"
-            value={formData.clientName}
-            onChange={handleInputChange('clientName')}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            required
-            aria-label="Client name"
-          />
-          <input
-            type="tel"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleInputChange('phone')}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            required
-            aria-label="Phone number"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleInputChange('email')}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            required
-            aria-label="Email address"
-          />
+          <div>
+            <input
+              {...register('clientName')}
+              type="text"
+              placeholder="Client Name"
+              className={`px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                errors.clientName ? 'border-red-500' : 'border-gray-300'
+              }`}
+              aria-label="Client name"
+              autoComplete="name"
+            />
+            {errors.clientName && (
+              <p className="mt-1 text-sm text-red-600" role="alert">
+                {errors.clientName.message}
+              </p>
+            )}
+          </div>
+          
+          <div>
+            <input
+              {...register('phone')}
+              type="tel"
+              placeholder="Phone"
+              className={`px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                errors.phone ? 'border-red-500' : 'border-gray-300'
+              }`}
+              aria-label="Phone number"
+              autoComplete="tel"
+            />
+            {errors.phone && (
+              <p className="mt-1 text-sm text-red-600" role="alert">
+                {errors.phone.message}
+              </p>
+            )}
+          </div>
+          
+          <div>
+            <input
+              {...register('email')}
+              type="email"
+              placeholder="Email"
+              className={`px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                errors.email ? 'border-red-500' : 'border-gray-300'
+              }`}
+              aria-label="Email address"
+              autoComplete="email"
+            />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-600" role="alert">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
         </fieldset>
         
         <div className="flex justify-between items-center mt-6">
           <div className="text-lg font-semibold text-gray-900">
-            Total: {formatCurrency(totalPrice)}
+            Total: <span data-testid="total-price">{formatCurrency(totalPrice)}</span>
           </div>
           <button
             type="submit"
             disabled={isDisabled}
-            className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md font-medium disabled:bg-gray-300 disabled:cursor-not-allowed"
+            className={`px-6 py-2 rounded-md font-medium transition-colors ${
+              isDisabled 
+                ? 'bg-gray-300 cursor-not-allowed text-gray-500' 
+                : 'bg-green-500 hover:bg-green-600 text-white'
+            }`}
             aria-label="Submit budget request"
           >
-            Submit Budget →
+            {isSubmitting ? 'Submitting...' : 'Submit Budget →'}
           </button>
         </div>
       </form>
