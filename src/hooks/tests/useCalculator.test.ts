@@ -1,6 +1,6 @@
 import { calculateTotalPrice } from '../../utils/budgetUtils';
-import { SERVICES_DATA } from '../../data/';
-import type { Service, WebConfiguration } from '../../types/';
+import { SERVICES_DATA } from '../../config/appData';
+import type { Service, WebConfiguration } from '../../config/types';
 
 describe('useCalculator Hook Logic', () => {
   describe('Service Selection Logic', () => {

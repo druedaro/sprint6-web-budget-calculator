@@ -1,4 +1,4 @@
-import type { Service } from '../types/';
+import type { Service } from './types';
 
 export const ANNUAL_DISCOUNT_RATE = 0.2;
 export const WEB_PAGE_BASE_COST = 30;

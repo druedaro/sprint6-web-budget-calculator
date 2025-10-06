@@ -1,4 +1,4 @@
-import type { Service } from '../../types/';
+import type { Service } from '../../config/types';
 
 interface ServicesListProps {
   services: Service[];

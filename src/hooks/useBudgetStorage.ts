@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import type { Budget } from '../types/';
+import type { Budget } from '../config/types';
 
 export const useBudgetStorage = (
   budgets: Budget[],

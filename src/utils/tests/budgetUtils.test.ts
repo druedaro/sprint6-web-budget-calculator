@@ -1,5 +1,5 @@
 import { calculateTotalPrice, formatCurrency } from '../budgetUtils';
-import type { Service, WebConfiguration } from '../../types/';
+import type { Service, WebConfiguration } from '../../config/types';
 
 describe('Budget Utilities - Essential Tests', () => {
   it('should calculate total price correctly', () => {

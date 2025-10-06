@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { BudgetFormData } from '../../types/';
+import type { BudgetFormData } from '../../config/types';
 import { formatCurrency } from '../../utils/budgetUtils';
 
 interface BudgetFormProps {

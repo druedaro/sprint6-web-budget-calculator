@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import type { Service, WebConfiguration } from '../types/';
-import { SERVICES_DATA } from '../data/';
+import type { Service, WebConfiguration } from '../config/types';
+import { SERVICES_DATA } from '../config/appData';
 
 export const useUrlSync = (
   services: Service[],
