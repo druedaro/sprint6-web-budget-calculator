@@ -89,9 +89,8 @@ src/
 ├── hooks/
 │   ├── useBudgetStorage.ts
 │   ├── useCalculator.ts
-│   ├── useUrlSync.ts
-│   └── tests/
-│       └── useCalculator.test.ts
+│   └── useUrlSync.ts
+│
 ├── index.css
 ├── main.tsx
 ├── pages/
@@ -101,7 +100,6 @@ src/
 └── utils/
     ├── budgetUtils.ts
     └── tests/
-        ├── budgetUtils.basics.test.ts
         ├── budgetUtils.integration.test.ts
         └── budgetUtils.moscow.test.ts
 ```
@@ -133,8 +131,6 @@ The project features a comprehensive testing strategy focused on business logic 
 ### Testing Methodology
 - **MoSCoW Method**: Business-critical functions are tested using MoSCoW prioritization (Must have, Should have, Could have, Won't have)
 - **Integration Tests**: Real customer scenarios and end-to-end workflow validation
-- **Unit Tests**: Individual function and component testing
-- **Hook Testing**: Custom React hooks behavior validation
 
 ### Test Categories
 - **Business Logic**: Budget calculations, pricing algorithms, currency formatting
