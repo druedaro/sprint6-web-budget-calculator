@@ -61,7 +61,7 @@ const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
               {...register('clientName')}
               type="text"
               placeholder="Client Name"
-              className={`px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 errors.clientName ? 'border-red-500' : 'border-gray-300'
               }`}
               aria-label="Client name"
@@ -79,7 +79,7 @@ const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
               {...register('phone')}
               type="tel"
               placeholder="Phone"
-              className={`px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 errors.phone ? 'border-red-500' : 'border-gray-300'
               }`}
               aria-label="Phone number"
@@ -97,7 +97,7 @@ const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
               {...register('email')}
               type="email"
               placeholder="Email"
-              className={`px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
                 errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
               aria-label="Email address"
