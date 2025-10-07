@@ -85,8 +85,8 @@ src/
 │   └── WelcomePage.tsx
 ├── setupTests.ts
 ├── utils/
-│   ├── budgetUtils.ts
-│   └── tests/
+    ├── budgetUtils.ts
+    └── tests/
 ```
 
 ---
