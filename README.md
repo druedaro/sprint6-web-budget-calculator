@@ -12,7 +12,6 @@ A modern React application for creating professional budget estimates for digita
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Testing](#testing)
-- [License](#license)
 
 ---
 
@@ -66,9 +65,23 @@ src/
 ├── assets/
 │   └── react.svg
 ├── components/
+│   ├── ScrollToTop.tsx
 │   ├── atoms/
+│   │   ├── Button.tsx
+│   │   ├── Checkbox.tsx
+│   │   ├── IconButton.tsx
+│   │   └── Input.tsx
 │   ├── molecules/
+│   │   ├── HelpModal.tsx
+│   │   ├── NumberInput.tsx
+│   │   ├── SearchBar.tsx
+│   │   └── ServiceCard.tsx
 │   └── organisms/
+│       ├── BudgetForm.tsx
+│       ├── BudgetList.tsx
+│       ├── BudgetSummary.tsx
+│       ├── ServicesList.tsx
+│       └── WebConfigurationPanel.tsx
 ├── config/
 │   ├── appData.ts
 │   ├── budgetFormValidation.ts
@@ -78,15 +91,19 @@ src/
 │   ├── useCalculator.ts
 │   ├── useUrlSync.ts
 │   └── tests/
+│       └── useCalculator.test.ts
 ├── index.css
 ├── main.tsx
 ├── pages/
 │   ├── CalculatorPage.tsx
 │   └── WelcomePage.tsx
 ├── setupTests.ts
-├── utils/
+└── utils/
     ├── budgetUtils.ts
     └── tests/
+        ├── budgetUtils.basics.test.ts
+        ├── budgetUtils.integration.test.ts
+        └── budgetUtils.moscow.test.ts
 ```
 
 ---
@@ -111,12 +128,22 @@ npm run build
 
 ## Testing
 
-The project includes comprehensive tests for:
+The project features a comprehensive testing strategy focused on business logic validation:
 
-- Utility functions
-- Custom hooks
-- Component interactions
+### Testing Methodology
+- **MoSCoW Method**: Business-critical functions are tested using MoSCoW prioritization (Must have, Should have, Could have, Won't have)
+- **Integration Tests**: Real customer scenarios and end-to-end workflow validation
+- **Unit Tests**: Individual function and component testing
+- **Hook Testing**: Custom React hooks behavior validation
+
+### Test Categories
+- **Business Logic**: Budget calculations, pricing algorithms, currency formatting
+- **Customer Scenarios**: Real-world usage patterns and edge cases
+- **Component Integration**: Form validation, state management, user interactions
+- **Utility Functions**: Helper functions and data transformations
 
 Run tests with `npm test` or `npm run test:watch` for watch mode.
+
+All tests focus on protecting revenue-critical calculations and ensuring reliable customer experience.
 
 ---
