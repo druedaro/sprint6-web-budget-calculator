@@ -28,7 +28,6 @@ describe('Integration Tests', () => {
       const webConfig: WebConfiguration = { pages: 1, languages: 1 };
 
       const total = calculateTotalPrice(services, webConfig, true);
-      // (300 + 400) * 0.8 = 560
       expect(total).toBe(560);
     });
 
@@ -40,8 +39,6 @@ describe('Integration Tests', () => {
       const webConfig: WebConfiguration = { pages: 5, languages: 2 };
 
       const total = calculateTotalPrice(services, webConfig, true);
-      // Web service: 500 + (5+2)*30 = 710
-      // Total: (300 + 400 + 710) * 0.8 = 1128
       expect(total).toBe(1128);
     });
 
@@ -54,7 +51,6 @@ describe('Integration Tests', () => {
       const webConfig: WebConfiguration = { pages: 1, languages: 1 };
 
       const result = calculateTotalPrice(services, webConfig, false);
-      // 500 + (1+1)*30 = 560
       expect(result).toBe(560);
     });
 
