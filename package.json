@@ -9,9 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cucumber": "cucumber-js --config cucumber.cjs",
-    "test:all": "npm run test && npm run test:cucumber"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -29,8 +27,6 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "^12.2.0",
-    "@cucumber/pretty-formatter": "^2.3.0",
     "@eslint/js": "^9.36.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
