@@ -116,3 +116,10 @@ export interface BudgetFormProps {
   onSubmit: (data: BudgetFormData) => void;
   totalPrice: number;
 }
+
+export interface ToggleProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+  disabled?: boolean;
+}
