@@ -47,7 +47,7 @@ describe('Integration Tests', () => {
   describe('Edge Cases', () => {
 
     test('should handle web service with minimum configuration', () => {
-      const services = [{ id: 'web', name: 'Web', price: 500, selected: true }];
+      const services = [{ id: 'web', name: 'Web', price: 500, selected: true, description: 'Web service' }];
       const webConfig: WebConfiguration = { pages: 1, languages: 1 };
 
       const result = calculateTotalPrice(services, webConfig, false);

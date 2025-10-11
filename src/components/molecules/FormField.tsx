@@ -1,44 +1,43 @@
-import type { ToggleProps } from '../../config/types';
+import { forwardRef } from 'react';
+import type { InputProps } from '../../config/types';
 
-const Toggle = ({ 
-  checked, 
-  onChange, 
-  label,
-  disabled = false,
-  className = '',
-  ...props 
-}: ToggleProps) => {
-  return (
-    <div className={`flex items-center ${className}`}>
-      <button
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        disabled={disabled}
-        onClick={() => onChange(!checked)}
-        className={`
-          relative inline-flex h-6 w-11 items-center rounded-full 
-          transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-          ${checked ? 'bg-green-600' : 'bg-gray-200'}
-        `}
-        {...props}
-      >
-        <span
+const FormField = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, error, helperText, className = '', ...props }, ref) => {
+    return (
+      <div className="space-y-1">
+        {label && (
+          <label className="block text-sm font-medium text-gray-700">
+            {label}
+          </label>
+        )}
+        
+        <input
+          ref={ref}
           className={`
-            inline-block h-4 w-4 transform rounded-full bg-white transition-transform
-            ${checked ? 'translate-x-6' : 'translate-x-1'}
+            w-full px-3 py-2 border rounded-md 
+            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
+            ${error ? 'border-red-500' : 'border-gray-300'}
+            ${className}
           `}
+          {...props}
         />
-      </button>
-      
-      {label && (
-        <span className={`ml-3 text-sm ${disabled ? 'text-gray-400' : 'text-gray-900'}`}>
-          {label}
-        </span>
-      )}
-    </div>
-  );
-};
+        
+        {error && (
+          <p className="text-sm text-red-600" role="alert">
+            {error}
+          </p>
+        )}
+        
+        {helperText && !error && (
+          <p className="text-sm text-gray-500">
+            {helperText}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
 
-export default Toggle;
+FormField.displayName = 'FormField';
+
+export default FormField;

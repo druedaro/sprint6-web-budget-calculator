@@ -8,7 +8,8 @@ describe('MUST HAVE: Business-Critical Functions', () => {
     id,
     name: `${id.toUpperCase()} Service`,
     price,
-    selected
+    selected,
+    description: `Description for ${id.toUpperCase()} Service`
   });
 
   const mockWebConfig: WebConfiguration = { pages: 1, languages: 1 };
@@ -118,9 +119,9 @@ describe('SHOULD HAVE: Complex Business Scenarios', () => {
 
   test('should handle complex calculation with all services and discount', () => {
     const services = [
-      { id: 'seo', name: 'SEO Campaign', price: 300, selected: true },
-      { id: 'ads', name: 'Advertising Campaign', price: 400, selected: true },
-      { id: 'web', name: 'Web Page', price: 500, selected: true }
+      { id: 'seo', name: 'SEO Campaign', price: 300, selected: true, description: 'SEO service' },
+      { id: 'ads', name: 'Advertising Campaign', price: 400, selected: true, description: 'Ads service' },
+      { id: 'web', name: 'Web Page', price: 500, selected: true, description: 'Web service' }
     ];
     const webConfig: WebConfiguration = { pages: 3, languages: 2 };
     
@@ -131,7 +132,7 @@ describe('SHOULD HAVE: Complex Business Scenarios', () => {
   });
 
   test('should maintain precision with discount calculations', () => {
-    const services = [{ id: 'seo', name: 'SEO', price: 333, selected: true }];
+    const services = [{ id: 'seo', name: 'SEO', price: 333, selected: true, description: 'SEO service' }];
     const webConfig: WebConfiguration = { pages: 1, languages: 1 };
     
     const result = calculateTotalPrice(services, webConfig, true);
