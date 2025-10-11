@@ -19,27 +19,27 @@ const WelcomePage = () => {
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             <div className="p-6 bg-green-50 rounded-lg">
               <div className="text-3xl mb-3">🚀</div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">SEO Campaigns</h3>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">SEO Campaigns</h2>
               <p className="text-gray-600">Professional SEO services starting at €300</p>
             </div>
             
             <div className="p-6 bg-green-50 rounded-lg">
               <div className="text-3xl mb-3">📈</div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Advertising</h3>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Advertising</h2>
               <p className="text-gray-600">Effective advertising campaigns from €400</p>
             </div>
             
             <div className="p-6 bg-emerald-50 rounded-lg">
               <div className="text-3xl mb-3">🌐</div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Custom Websites</h3>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">Custom Websites</h2>
               <p className="text-gray-600">Tailored websites with flexible pricing</p>
             </div>
           </div>
           
           <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
               Key Features
-            </h2>
+            </h3>
             
             <div className="grid md:grid-cols-2 gap-4 text-left mb-8">
               <div className="flex items-start space-x-3">
