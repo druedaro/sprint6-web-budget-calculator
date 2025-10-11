@@ -11,7 +11,7 @@ const ServicesList = ({ services, onServiceToggle, annualDiscount = false }: Ser
                 {service.name}
               </h3>
               <p className="text-sm text-gray-600 mb-2">
-                Complete responsive website development
+                {service.description}
               </p>
               {annualDiscount && (
                 <p className="text-sm text-orange-500 font-medium">

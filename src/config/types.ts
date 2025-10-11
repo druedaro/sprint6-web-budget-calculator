@@ -5,6 +5,7 @@ export interface Service {
   name: string;
   price: number;
   selected: boolean;
+  description: string;
 }
 
 export interface WebConfiguration {
@@ -115,4 +116,17 @@ export interface WebConfigurationProps {
 export interface BudgetFormProps {
   onSubmit: (data: BudgetFormData) => void;
   totalPrice: number;
+}
+
+export interface ToggleProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  label?: string;
+  disabled?: boolean;
+}
+
+export interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+  helperText?: string;
 }

@@ -6,9 +6,27 @@ export const CURRENCY = 'EUR';
 export const LOCALE = 'en-US';
 
 export const SERVICES_DATA: Service[] = [
-  { id: 'seo', name: 'SEO Campaign', price: 300, selected: false },
-  { id: 'ads', name: 'Advertising Campaign', price: 400, selected: false },
-  { id: 'web', name: 'Web Page', price: 500, selected: false },
+  { 
+    id: 'seo', 
+    name: 'SEO Campaign', 
+    price: 300, 
+    selected: false,
+    description: 'Improve your website\'s visibility in search engines with our comprehensive SEO strategy.'
+  },
+  { 
+    id: 'ads', 
+    name: 'Advertising Campaign', 
+    price: 400, 
+    selected: false,
+    description: 'Reach your target audience effectively with strategic advertising campaigns across multiple platforms.'
+  },
+  { 
+    id: 'web', 
+    name: 'Web Page', 
+    price: 500, 
+    selected: false,
+    description: 'Get a professional, responsive website tailored to your business needs and goals.'
+  },
 ];
 
 export const HELP_CONTENT = {
