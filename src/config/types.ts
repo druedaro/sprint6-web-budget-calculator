@@ -35,11 +35,6 @@ export interface BudgetFormData {
 
 export type SortOrder = 'alphabetical' | 'date' | 'reset';
 
-export interface ServiceCardProps {
-  service: Service;
-  onToggle: (serviceId: string) => void;
-}
-
 export interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;

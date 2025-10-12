@@ -60,22 +60,23 @@ The philosophy behind this app is:
 
 ```
 src/
-├── App.css
 ├── App.tsx
 ├── assets/
 │   └── react.svg
 ├── components/
-│   ├── ScrollToTop.tsx
+│   ├── utils/
+│   │   └── ScrollToTop.tsx
 │   ├── atoms/
 │   │   ├── Button.tsx
 │   │   ├── Checkbox.tsx
 │   │   ├── IconButton.tsx
-│   │   └── Input.tsx
+│   │   ├── Input.tsx
+│   │   └── Toggle.tsx
 │   ├── molecules/
+│   │   ├── FormField.tsx
 │   │   ├── HelpModal.tsx
 │   │   ├── NumberInput.tsx
-│   │   ├── SearchBar.tsx
-│   │   └── ServiceCard.tsx
+│   │   └── SearchBar.tsx
 │   └── organisms/
 │       ├── BudgetForm.tsx
 │       ├── BudgetList.tsx
