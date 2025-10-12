@@ -100,14 +100,6 @@ export interface BudgetListProps {
   onSortOrderChange: (order: SortOrder) => void;
 }
 
-export interface BudgetSummaryProps {
-  totalPrice: number;
-  annualDiscount: boolean;
-  onAnnualDiscountChange: (checked: boolean) => void;
-  onRequestBudget: () => void;
-  hasSelectedServices?: boolean;
-}
-
 export interface WebConfigurationProps {
   webConfig: WebConfiguration;
   onConfigChange: (field: 'pages' | 'languages', value: number) => void;

@@ -27,7 +27,18 @@ const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
     reset();
   };
 
+  const handleShareURL = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert('URL copied to clipboard! You can now share this budget configuration.');
+    } catch (error) {
+      console.error('Failed to copy URL:', error);
+      alert(`Share this URL: ${window.location.href}`);
+    }
+  };
+
   const isDisabled = totalPrice === 0 || isSubmitting || !isValid;
+  const hasServices = totalPrice > 0;
 
   return (
     <section className="bg-white rounded-lg shadow-md p-6">
@@ -82,18 +93,30 @@ const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
           <div className="text-lg font-semibold text-gray-900">
             Total: <span data-testid="total-price">{formatCurrency(totalPrice)}</span>
           </div>
-          <button
-            type="submit"
-            disabled={isDisabled}
-            className={`px-6 py-2 rounded-md font-medium transition-colors ${
-              isDisabled 
-                ? 'bg-gray-300 cursor-not-allowed text-gray-500' 
-                : 'bg-green-500 hover:bg-green-600 text-white'
-            }`}
-            aria-label="Submit budget request"
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit Budget →'}
-          </button>
+          <div className="flex gap-3">
+            {hasServices && (
+              <button
+                type="button"
+                onClick={handleShareURL}
+                className="px-6 py-2 rounded-md font-medium transition-colors bg-gray-200 hover:bg-gray-300 text-gray-700"
+                aria-label="Share budget URL"
+              >
+                📋 Share URL
+              </button>
+            )}
+            <button
+              type="submit"
+              disabled={isDisabled}
+              className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                isDisabled 
+                  ? 'bg-gray-300 cursor-not-allowed text-gray-500' 
+                  : 'bg-green-500 hover:bg-green-600 text-white'
+              }`}
+              aria-label="Submit budget request"
+            >
+              {isSubmitting ? 'Submitting...' : 'Submit Budget →'}
+            </button>
+          </div>
         </div>
       </form>
     </section>

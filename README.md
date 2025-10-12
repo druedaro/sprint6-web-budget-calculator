@@ -79,7 +79,6 @@ src/
 │   └── organisms/
 │       ├── BudgetForm.tsx
 │       ├── BudgetList.tsx
-│       ├── BudgetSummary.tsx
 │       ├── ServicesList.tsx
 │       └── WebConfigurationPanel.tsx
 ├── config/
