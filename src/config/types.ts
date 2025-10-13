@@ -70,11 +70,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   helperText?: string;
 }
 
-export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  description?: string;
-}
-
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
   variant?: 'primary' | 'secondary' | 'outline';

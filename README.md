@@ -61,14 +61,11 @@ The philosophy behind this app is:
 ```
 src/
 ├── App.tsx
-├── assets/
-│   └── react.svg
 ├── components/
 │   ├── utils/
 │   │   └── ScrollToTop.tsx
 │   ├── atoms/
 │   │   ├── Button.tsx
-│   │   ├── Checkbox.tsx
 │   │   ├── IconButton.tsx
 │   │   ├── Input.tsx
 │   │   └── Toggle.tsx
