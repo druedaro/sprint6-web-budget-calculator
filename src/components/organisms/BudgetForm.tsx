@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { BudgetFormProps } from '../../config/types';
 import { budgetFormSchema, type BudgetFormSchema } from '../../config/budgetFormValidation';
 import { formatCurrency } from '../../utils/budgetUtils';
-import FormField from '../molecules/FormField';
+import Input from '../atoms/Input';
 
 const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
   const {
@@ -50,40 +50,38 @@ const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
       
       <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-4" noValidate>
         <fieldset>
-          <FormField
+          <Input
             {...register('budgetName')}
+            label="Budget Name"
             type="text"
-            placeholder="Budget Name"
-            aria-label="Budget name"
-            autoComplete="off"
+            placeholder="Descriptive Budget Name"
             error={errors.budgetName?.message}
+            helperText="Give your budget a descriptive name"
           />
         </fieldset>
         
         <fieldset className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <FormField
+          <Input
             {...register('clientName')}
+            label="Client Name"
             type="text"
-            placeholder="Client Name"
-            aria-label="Client name"
-            autoComplete="name"
+            placeholder="David Rueda"
             error={errors.clientName?.message}
           />
           
-          <FormField
+          <Input
             {...register('phone')}
+            label="Phone"
             type="tel"
-            placeholder="Phone"
-            aria-label="Phone number"
-            autoComplete="tel"
+            placeholder="+34 612 345 678"
             error={errors.phone?.message}
           />
           
-          <FormField
+          <Input
             {...register('email')}
+            label="Email"
             type="email"
-            placeholder="Email"
-            aria-label="Email address"
+            placeholder="example@gmail.com"
             autoComplete="email"
             error={errors.email?.message}
           />
@@ -114,7 +112,7 @@ const BudgetForm = ({ onSubmit, totalPrice }: BudgetFormProps) => {
               }`}
               aria-label="Submit budget request"
             >
-              {isSubmitting ? 'Submitting...' : 'Submit Budget →'}
+              Submit Budget →
             </button>
           </div>
         </div>
