@@ -29,7 +29,7 @@ const BudgetList = ({
       .join(', ');
   };
   
-  if (budgets.length === 0) {
+  if (budgets.length === 0 && !searchTerm) {
     return (
       <div className="bg-white rounded-lg shadow-md p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">
@@ -83,6 +83,13 @@ const BudgetList = ({
         </div>
       </header>
       
+      {budgets.length === 0 && searchTerm && (
+        <p className="text-gray-500 text-center py-8">
+          No results match your search "{searchTerm}". Try clearing the search or using different keywords.
+        </p>
+      )}
+      
+      {budgets.length > 0 && (
       <div className="space-y-4">
         {budgets.map((budget) => (
           <article key={budget.id} className="border border-gray-200 rounded-lg p-4 hover:border-green-300 transition-colors">
@@ -120,6 +127,7 @@ const BudgetList = ({
           </article>
         ))}
       </div>
+      )}
     </section>
   );
 };
