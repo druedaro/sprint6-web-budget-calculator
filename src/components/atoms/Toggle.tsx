@@ -1,12 +1,11 @@
 import type { ToggleProps } from '../../config/types';
 
 const Toggle = ({ 
-  checked, 
-  onChange, 
-  label,
+  checked,
+  onChange,
   disabled = false,
   className = '',
-  ...props 
+  ...props
 }: ToggleProps) => {
   return (
     <div className={`flex items-center ${className}`}>
@@ -31,12 +30,6 @@ const Toggle = ({
           `}
         />
       </button>
-      
-      {label && (
-        <span className={`ml-3 text-sm ${disabled ? 'text-gray-400' : 'text-gray-900'}`}>
-          {label}
-        </span>
-      )}
     </div>
   );
 };
