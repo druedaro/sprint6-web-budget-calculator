@@ -7,8 +7,7 @@ const NumberInput = ({
   value, 
   onChange, 
   min = 1, 
-  max = 100,
-  helpText 
+  max = 100
 }: NumberInputProps) => {
   const handleIncrement = () => {
     if (value < max) {
@@ -60,9 +59,6 @@ const NumberInput = ({
           aria-label={`Increase ${label.toLowerCase()}`}
         />
       </div>
-      {helpText && (
-        <p className="text-sm text-gray-500">{helpText}</p>
-      )}
     </div>
   );
 };

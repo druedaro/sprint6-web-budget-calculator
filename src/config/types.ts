@@ -48,7 +48,6 @@ export interface NumberInputProps {
   onChange: (value: number) => void;
   min?: number;
   max?: number;
-  helpText?: string;
 }
 
 export interface HelpModalProps {
