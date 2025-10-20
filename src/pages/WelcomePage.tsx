@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '../components/atoms/Button';
+import { PATHS } from '../routes/paths';
 
 const WelcomePage = () => {
   return (
@@ -69,7 +70,7 @@ const WelcomePage = () => {
             </div>
           </div>
           
-          <Link to="/calculator">
+          <Link to={PATHS.CALCULATOR}>
             <Button variant="primary" size="lg" className="text-lg px-8 py-4 my-7 lg:mt-12">
               Start Creating Budgets
             </Button>
