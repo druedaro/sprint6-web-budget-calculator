@@ -6,6 +6,7 @@ import BudgetList from '../components/organisms/BudgetList';
 import Toggle from '../components/atoms/Toggle';
 import { formatCurrency } from '../utils/budgetUtils';
 import { useCalculator } from '../hooks/useCalculator';
+import { PATHS } from '../routes/paths';
 
 const CalculatorPage = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const CalculatorPage = () => {
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-8">
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate(PATHS.HOME)}
             className="inline-flex items-center text-green-600 hover:text-green-700 mb-4"
           >
             ← Back to Home
