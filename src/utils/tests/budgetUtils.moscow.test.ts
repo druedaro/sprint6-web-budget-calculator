@@ -1,5 +1,6 @@
 
-import { calculateTotalPrice, calculateWebPrice, formatCurrency } from '../budgetUtils';
+import { calculateTotalPrice, calculateWebPrice, formatCurrency, generateBudgetId } from '../budgetUtils';
+import { SERVICES_DATA } from '../../config/appData';
 import type { Service, WebConfiguration } from '../../config/types';
 
 describe('MUST HAVE: Business-Critical Functions', () => {
@@ -63,6 +64,14 @@ describe('MUST HAVE: Business-Critical Functions', () => {
       expect(result).toBe(0);
     });
 
+    test('should handle web service with minimum configuration', () => {
+      const services = [createMockService('web', 500, true)];
+      const webConfig: WebConfiguration = { pages: 1, languages: 1 };
+
+      const result = calculateTotalPrice(services, webConfig, false);
+      expect(result).toBe(560);
+    });
+
   });
 
   describe('calculateWebPrice - Configuration Pricing', () => {
@@ -111,11 +120,73 @@ describe('MUST HAVE: Business-Critical Functions', () => {
       expect(result).toMatch(/€12,345\.67/);
     });
 
+    test('should handle different currency amounts for display', () => {
+      const testCases = [
+        { amount: 0, expected: /€0\.00/ },
+        { amount: 10000, expected: /€10,000\.00/ }
+      ];
+
+      testCases.forEach(({ amount, expected }) => {
+        expect(formatCurrency(amount)).toMatch(expected);
+      });
+    });
+
+  });
+
+  describe('generateBudgetId - System Integration', () => {
+
+    test('should generate valid budget IDs', () => {
+      const id1 = generateBudgetId();
+      const id2 = generateBudgetId();
+
+      expect(id1).toMatch(/^budget-\d+$/);
+      expect(id2).toMatch(/^budget-\d+$/);
+      expect(typeof id1).toBe('string');
+      expect(typeof id2).toBe('string');
+      expect(id1.length).toBeGreaterThan(7);
+    });
+
   });
 
 });
 
 describe('SHOULD HAVE: Complex Business Scenarios', () => {
+
+  test('Small Business Package: SEO only', () => {
+    const services = SERVICES_DATA.map(service => ({
+      ...service,
+      selected: service.id === 'seo'
+    }));
+    const webConfig: WebConfiguration = { pages: 1, languages: 1 };
+
+    const total = calculateTotalPrice(services, webConfig, false);
+    const formatted = formatCurrency(total);
+
+    expect(total).toBe(300);
+    expect(formatted).toMatch(/€300\.00/);
+  });
+
+  test('Medium Business Package: SEO + Ads with annual discount', () => {
+    const services = SERVICES_DATA.map(service => ({
+      ...service,
+      selected: service.id === 'seo' || service.id === 'ads'
+    }));
+    const webConfig: WebConfiguration = { pages: 1, languages: 1 };
+
+    const total = calculateTotalPrice(services, webConfig, true);
+    expect(total).toBe(560);
+  });
+
+  test('Complete Package: All services + web configuration + discount', () => {
+    const services = SERVICES_DATA.map(service => ({
+      ...service,
+      selected: true
+    }));
+    const webConfig: WebConfiguration = { pages: 5, languages: 2 };
+
+    const total = calculateTotalPrice(services, webConfig, true);
+    expect(total).toBe(1128);
+  });
 
   test('should handle complex calculation with all services and discount', () => {
     const services = [
