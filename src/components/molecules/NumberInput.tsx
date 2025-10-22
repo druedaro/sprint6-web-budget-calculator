@@ -22,7 +22,7 @@ const NumberInput = ({
   };
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value, 10);
+    const newValue = Number(e.target.value);
     if (!isNaN(newValue) && newValue >= min && newValue <= max) {
       onChange(newValue);
     }
