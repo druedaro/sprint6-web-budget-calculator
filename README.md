@@ -127,7 +127,6 @@ The project features a comprehensive testing strategy focused on business logic 
 
 ### Testing Methodology
 - **MoSCoW Method**: Business-critical functions are tested using MoSCoW prioritization (Must have, Should have, Could have, Won't have)
-- **Integration Tests**: Real customer scenarios and end-to-end workflow validation
 
 ### Test Categories
 - **Business Logic**: Budget calculations, pricing algorithms, currency formatting
