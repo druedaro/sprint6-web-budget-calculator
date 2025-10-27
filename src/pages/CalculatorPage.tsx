@@ -4,8 +4,8 @@ import WebConfigurationPanel from '../components/organisms/WebConfigurationPanel
 import BudgetForm from '../components/organisms/BudgetForm';
 import BudgetList from '../components/organisms/BudgetList';
 import Toggle from '../components/atoms/Toggle';
-import { formatCurrency } from '../utils/budgetUtils';
-import { useCalculator } from '../hooks/useCalculator';
+import { formatCurrency } from '../utils/formatters';
+import { useStateCalculator } from '../hooks/useStateCalculator';
 import { PATHS } from '../routes/paths';
 
 const CalculatorPage = () => {
@@ -26,7 +26,7 @@ const CalculatorPage = () => {
     setAnnualDiscount,
     setSortOrder,
     setSearchTerm,
-  } = useCalculator();
+  } = useStateCalculator();
 
   return (
     <div className="min-h-screen bg-gray-50">

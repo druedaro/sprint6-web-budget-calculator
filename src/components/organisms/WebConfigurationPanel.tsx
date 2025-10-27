@@ -2,7 +2,8 @@ import { useState } from 'react';
 import NumberInput from '../molecules/NumberInput';
 import HelpModal from '../molecules/HelpModal';
 import IconButton from '../atoms/IconButton';
-import { calculateWebPrice, formatCurrency } from '../../utils/budgetUtils';
+import { calculateWebPrice } from '../../services/budgetService';
+import { formatCurrency } from '../../utils/formatters';
 import { HELP_CONTENT } from '../../config/appData';
 import type { WebConfigurationProps } from '../../config/types';
 

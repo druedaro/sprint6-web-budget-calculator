@@ -1,11 +1,19 @@
 import { useState } from 'react';
 import type { Service, WebConfiguration, Budget, BudgetFormData, SortOrder } from '../config/types';
-import { calculateTotalPrice, generateBudgetId, sortBudgets, filterBudgets } from '../utils/budgetUtils';
+import { 
+  calculateTotalPrice, 
+  generateBudgetId, 
+  sortBudgets, 
+  filterBudgets,
+  getSelectedServices 
+} from '../services/budgetService';
 import { SERVICES_DATA } from '../config/appData';
-import { useUrlSync } from './useUrlSync';
-import { useBudgetStorage } from './useBudgetStorage';
+import { useEffectUrlSync } from './useEffectUrlSync';
+import { useEffectBudgetStorage } from './useEffectBudgetStorage';
 
-export const useCalculator = () => {
+const NO_SERVICES_SELECTED_MESSAGE = 'Please select at least one service before creating a budget.';
+
+export const useStateCalculator = () => {
   const [services, setServices] = useState<Service[]>(SERVICES_DATA);
   const [webConfig, setWebConfig] = useState<WebConfiguration>({ pages: 1, languages: 1 });
   const [annualDiscount, setAnnualDiscount] = useState(false);
@@ -13,8 +21,8 @@ export const useCalculator = () => {
   const [sortOrder, setSortOrder] = useState<SortOrder>('reset');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { clearURL } = useUrlSync(services, webConfig, setServices, setWebConfig);
-  useBudgetStorage(budgets, setBudgets);
+  const { clearURL } = useEffectUrlSync(services, webConfig, setServices, setWebConfig);
+  useEffectBudgetStorage(budgets, setBudgets);
 
   const handleServiceToggle = (serviceId: string) => {
     setServices(prevServices => 
@@ -29,29 +37,34 @@ export const useCalculator = () => {
   };
 
   const handleBudgetSubmit = (formData: BudgetFormData) => {
-    const selectedServices = services.filter(service => service.selected);
-    
-    if (selectedServices.length === 0) {
-      alert('Please select at least one service before creating a budget.');
-      return;
+    try {
+      const selectedServices = getSelectedServices(services);
+      
+      if (selectedServices.length === 0) {
+        alert(NO_SERVICES_SELECTED_MESSAGE);
+        return;
+      }
+
+      const newBudget: Budget = {
+        id: generateBudgetId(),
+        ...formData,
+        services: selectedServices,
+        webConfig: selectedServices.some(s => s.id === 'web') ? webConfig : { pages: 1, languages: 1 },
+        totalPrice: calculateTotalPrice(services, webConfig, annualDiscount),
+        annualDiscount,
+        createdAt: new Date(),
+      };
+
+      setBudgets(prev => [...prev, newBudget]);
+      
+      setServices(SERVICES_DATA.map(service => ({ ...service, selected: false })));
+      setWebConfig({ pages: 1, languages: 1 });
+      setAnnualDiscount(false);
+      clearURL();
+    } catch (error) {
+      console.error('Error creating budget:', error);
+      alert('Failed to create budget. Please try again.');
     }
-
-    const newBudget: Budget = {
-      id: generateBudgetId(),
-      ...formData,
-      services: selectedServices,
-      webConfig: selectedServices.some(s => s.id === 'web') ? webConfig : { pages: 1, languages: 1 },
-      totalPrice: calculateTotalPrice(services, webConfig, annualDiscount),
-      annualDiscount,
-      createdAt: new Date(),
-    };
-
-    setBudgets(prev => [...prev, newBudget]);
-    
-    setServices(SERVICES_DATA.map(service => ({ ...service, selected: false })));
-    setWebConfig({ pages: 1, languages: 1 });
-    setAnnualDiscount(false);
-    clearURL();
   };
 
   const totalPrice = calculateTotalPrice(services, webConfig, annualDiscount);

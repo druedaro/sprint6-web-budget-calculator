@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import type { Budget } from '../config/types';
 
-export const useBudgetStorage = (
+export const useEffectBudgetStorage = (
   budgets: Budget[],
   setBudgets: (budgets: Budget[]) => void
 ) => {
@@ -23,7 +23,11 @@ export const useBudgetStorage = (
 
   useEffect(() => {
     if (budgets.length > 0) {
-      localStorage.setItem('budgets', JSON.stringify(budgets));
+      try {
+        localStorage.setItem('budgets', JSON.stringify(budgets));
+      } catch (error) {
+        console.error('Error saving budgets:', error);
+      }
     }
   }, [budgets]);
 };

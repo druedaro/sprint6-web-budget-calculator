@@ -2,6 +2,8 @@
 
 A modern React application for creating professional budget estimates for digital marketing and web development projects.
 
+![Budget Calculator Preview](https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=400&fit=crop)
+
 ---
 
 ## Table of Contents
@@ -45,14 +47,14 @@ The philosophy behind this app is:
 
 ## Tech Stack
 
-- **React 19** with hooks
-- **TypeScript** for type safety
-- **Tailwind CSS** for styling
-- **React Router** for navigation
-- **React Hook Form** for form state management
-- **Zod** for schema validation
-- **Jest** for testing
-- **Vite** for build tooling
+- ⚛️ **React 19** with hooks
+- 🔷 **TypeScript** for type safety
+- 🎨 **Tailwind CSS** for styling
+- 🧭 **React Router** for navigation
+- 📋 **React Hook Form** for form state management
+- ✅ **Zod** for schema validation
+- 🧪 **Jest** for testing
+- ⚡ **Vite** for build tooling
 
 ---
 
@@ -62,15 +64,12 @@ The philosophy behind this app is:
 src/
 ├── App.tsx
 ├── components/
-│   ├── utils/
-│   │   └── ScrollToTop.tsx
 │   ├── atoms/
 │   │   ├── Button.tsx
 │   │   ├── IconButton.tsx
 │   │   ├── Input.tsx
 │   │   └── Toggle.tsx
 │   ├── molecules/
-│   │   ├── FormField.tsx
 │   │   ├── HelpModal.tsx
 │   │   ├── NumberInput.tsx
 │   │   └── SearchBar.tsx
@@ -84,26 +83,43 @@ src/
 │   ├── budgetFormValidation.ts
 │   └── types.ts
 ├── hooks/
-│   ├── useBudgetStorage.ts
-│   ├── useCalculator.ts
-│   └── useUrlSync.ts
-│
+│   ├── useEffectBudgetStorage.ts
+│   ├── useEffectScrollToTop.ts
+│   ├── useEffectUrlSync.ts
+│   └── useStateCalculator.ts
 ├── index.css
 ├── main.tsx
 ├── pages/
 │   ├── CalculatorPage.tsx
 │   └── WelcomePage.tsx
+├── routes/
+│   └── paths.ts
+├── services/
+│   ├── budgetService.ts
+│   └── tests/
+│       ├── __mocks__/
+│       │   └── testFixtures.ts
+│       └── budgetService.moscow.test.ts
 ├── setupTests.ts
 └── utils/
-    ├── budgetUtils.ts
-    └── tests/
-        ├── budgetUtils.integration.test.ts
-        └── budgetUtils.moscow.test.ts
+    └── formatters.ts
 ```
 
 ---
 
 ## Getting Started
+
+### Clone the Repository
+
+```bash
+# Clone the repository
+git clone https://github.com/druedaro/sprint6-web-budget-calculator.git
+
+# Navigate to the project directory
+cd sprint6-web-budget-calculator
+```
+
+### Installation & Development
 
 ```bash
 # Install dependencies

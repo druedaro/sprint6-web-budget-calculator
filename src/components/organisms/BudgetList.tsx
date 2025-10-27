@@ -1,6 +1,6 @@
 import Button from '../atoms/Button';
 import SearchBar from '../molecules/SearchBar';
-import { formatCurrency } from '../../utils/budgetUtils';
+import { formatCurrency } from '../../utils/formatters';
 import type { BudgetListProps, Budget } from '../../config/types';
 
 const BudgetList = ({ 
